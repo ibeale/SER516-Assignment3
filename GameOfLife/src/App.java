@@ -23,7 +23,7 @@ public class App extends JFrame {
 	}
 
 	public App() {
-		buttons = new Cell[500][500];
+		buttons = new Cell[CELLSPEROW][CELLSPEROW];
 
 		frame = new JFrame("Game of Life");
 		frame.setSize(FRAMESIZE, FRAMESIZE);
