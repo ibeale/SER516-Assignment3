@@ -1,4 +1,7 @@
-package src;
+package Controller;
+
+import Model.State;
+import View.Cell;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -33,6 +36,8 @@ public class App extends JFrame {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
+		State model = new State();
 	}
 
 	private void initializeGrid() {
