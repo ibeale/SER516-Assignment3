@@ -17,6 +17,10 @@ public class State {
         Populate,
         NoChange
     }
+
+    public boolean[][] getCurrentState(){
+        return this._currentState;
+    }
     
     private State(){
         this._currentState = new boolean[this._width][this._height];
@@ -53,7 +57,7 @@ public class State {
             for(int yDir : directions){
                 int xCoord = x + xDir;
                 int yCoord = y + yDir;
-                if(!(xDir == 0 && yDir ==0) && (xCoord >= 0 && xCoord <= this._width) && (yCoord >= 0 && yCoord <= this._height) && getCellState(xCoord, yCoord)){
+                if(!(xDir == 0 && yDir ==0) && (xCoord >= 0 && xCoord < this._width) && (yCoord >= 0 && yCoord < this._height) && getCellState(xCoord, yCoord)){
                     count += 1;
                 }
             }
@@ -80,7 +84,39 @@ public class State {
         else{
             return Conditions.NoChange;
         }
+    }
 
+    public void incrementState(){
+        boolean[][] newState = new boolean[this._width][this._height];
+        for(boolean[] column : newState){
+            Arrays.fill(column, false);
+        }
+
+        for(int x = 0; x < this._width; x++){
+            for(int y = 0; y < this._height; y++){
+                Conditions curCondition = this.getConditionofCell(x, y);
+                switch(curCondition){
+                    case NoChange:
+                        newState[x][y] = this._currentState[x][y];
+                        break;
+                    case Overpopulated:
+                        newState[x][y] = false;
+                        break;
+                    case Populate:
+                        newState[x][y] = true;
+                        break;
+                    case Solitary:
+                        newState[x][y] = false;
+                        break;
+                    case Survives:
+                        newState[x][y] = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        this._currentState = newState;
     }
 }
 
