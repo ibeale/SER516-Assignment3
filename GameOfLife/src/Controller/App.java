@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import View.Cell;
 
 public class App extends JFrame {
+	private static final int CELLSPEROW = 15;
+	private static final int FRAMESIZE = 500;
 	private JFrame frame;
-	Cell[][] buttons = new Cell[25][25];
+	Cell[][] buttons = new Cell[CELLSPEROW][CELLSPEROW];
 	private JButton start;
 	private JButton pause;
 
@@ -24,10 +26,10 @@ public class App extends JFrame {
 	}
 
 	public App() {
-		buttons = new Cell[500][500];
+		buttons = new Cell[CELLSPEROW][CELLSPEROW];
 
-		frame = new JFrame("Minesweeper");
-		frame.setSize(500, 500);
+		frame = new JFrame("Game of Life");
+		frame.setSize(FRAMESIZE, FRAMESIZE);
 		frame.setLayout(new BorderLayout());
 
 		initializeButtonPanel();
@@ -42,9 +44,9 @@ public class App extends JFrame {
 
 	private void initializeGrid() {
 		Container grid = new Container();
-		grid.setLayout(new GridLayout(25, 25));
-		for (int i = 0; i < 25; i++) {
-			for (int j = 0; j < 25; j++) {
+		grid.setLayout(new GridLayout(CELLSPEROW, CELLSPEROW));
+		for (int i = 0; i < CELLSPEROW; i++) {
+			for (int j = 0; j < CELLSPEROW; j++) {
 				buttons[i][j] = new Cell();
 				grid.add(buttons[i][j]);
 			}
