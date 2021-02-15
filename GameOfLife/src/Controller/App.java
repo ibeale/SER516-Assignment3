@@ -1,4 +1,4 @@
-package src;
+package Controller;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
