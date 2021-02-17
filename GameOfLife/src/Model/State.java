@@ -9,7 +9,10 @@ public class State {
     private static int _width = 5;
     private static int _height = 5;
 
+    private int count = 0;
+
     private boolean[][] _currentState;
+    private boolean[][] _originalState;
 
     public enum Conditions {
         Overpopulated, Solitary, Survives, Populate, NoChange
@@ -55,7 +58,9 @@ public class State {
     }
 
     public void resetState() {
-        instance = new State();
+
+        //instance = new State();
+        this._currentState = this._originalState;
     }
 
     // Sets the status of a single cell, and returns the new status.
@@ -103,6 +108,11 @@ public class State {
     }
 
     public void incrementState() {
+        if(count == 0)
+        {
+            this._originalState = this._currentState;
+            count++;
+        }
         boolean[][] newState = new boolean[_width][_height];
         for (boolean[] column : newState) {
             Arrays.fill(column, false);
