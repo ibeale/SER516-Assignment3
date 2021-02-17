@@ -1,18 +1,23 @@
 package View;
 
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import Controller.*;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import Controller.CellStateController;
+
+/**
+ * The Cell class binds the state of a cell(alive or not), its position on grid
+ * and background color.
+ */
 public class Cell extends JButton implements ActionListener {
 	ImageIcon yellowBG;
-	// byte value = 0;
 	boolean isAlive;
 	int row;
 	int col;
-	Controller controller = Controller.getInstance();
+	CellStateController controller = CellStateController.getInstance();
 
 	public Cell() {
 		yellowBG = new ImageIcon(this.getClass().getResource("yellowBG.jpg"));
@@ -28,15 +33,15 @@ public class Cell extends JButton implements ActionListener {
 		this.addActionListener(this);
 	}
 
-	public boolean getCellState(){
+	public boolean getCellState() {
 		return isAlive;
 	}
 
-	public void updateCellState(boolean newState){
+	public void updateCellState(boolean newState) {
 		isAlive = newState;
-		if(isAlive){
+		if (isAlive) {
 			setIcon(yellowBG);
-		}else{
+		} else {
 			setIcon(null);
 		}
 	}
@@ -44,17 +49,5 @@ public class Cell extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		boolean newState = controller.onCellClicked(row, col);
 		updateCellState(newState);
-		// value++;
-		// value %= 2;
-		// switch (value) {
-		// case 0:
-		// 	setIcon(null);
-		// 	isAlive = false;
-		// 	break;
-		// case 1:
-		// 	setIcon(yellowBG);
-		// 	isAlive = true;
-		// 	break;
-		// }
 	}
 }
