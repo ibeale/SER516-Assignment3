@@ -27,15 +27,7 @@ public class CellStateController {
 	 */
 	public void onIncrement() {
 		model.incrementState();
-		Cell[][] buttons = model.getCellButtons();
-		boolean[][] newState = model.getCurrentState();
-
-		for (int x = 0; x < newState.length; x++) {
-			for (int y = 0; y < newState[x].length; y++) {
-				buttons[x][y].updateCellState(newState[x][y]);
-			}
-		}
-		model.setCellButtons(buttons);
+		updateCell();
 	}
 
 	/**
@@ -69,6 +61,19 @@ public class CellStateController {
 	 * game.
 	 */
 	public void onReset() {
+		model.resetState();
+		updateCell();
+	}
 
+	public void updateCell() {
+		Cell[][] buttons = model.getCellButtons();
+		boolean[][] newState = model.getCurrentState();
+
+		for (int x = 0; x < newState.length; x++) {
+			for (int y = 0; y < newState[x].length; y++) {
+				buttons[x][y].updateCellState(newState[x][y]);
+			}
+		}
+		model.setCellButtons(buttons);
 	}
 }

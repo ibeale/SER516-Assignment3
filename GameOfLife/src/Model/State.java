@@ -13,8 +13,10 @@ public class State {
 
 	private static int _width = 5;
 	private static int _height = 5;
+	private boolean isIncremented = false;
 	private Cell[][] buttons = new Cell[_height][_width];
 	private boolean[][] _currentState;
+	private boolean[][] _originalState;
 
 	public enum Conditions {
 		Overpopulated, Solitary, Survives, Populate, NoChange
@@ -55,7 +57,13 @@ public class State {
 	}
 
 	public void resetState() {
-		instance = new State();
+		if(isIncremented == false)
+		{
+			instance = new State();
+		}
+		else{
+			this._currentState = this._originalState;
+		}
 	}
 
 	public boolean toggleSingleCell(int x, int y) {
@@ -114,6 +122,13 @@ public class State {
 	 * The function calculates one next state at a time.
 	 */
 	public void incrementState() {
+		//Store the original state
+		if(isIncremented == false)
+		{
+			this._originalState = this._currentState;
+			isIncremented = true;
+		}
+
 		boolean[][] newState = new boolean[_width][_height];
 		for (boolean[] column : newState) {
 			Arrays.fill(column, false);
