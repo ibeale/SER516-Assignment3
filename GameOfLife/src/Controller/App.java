@@ -14,11 +14,13 @@ import Model.State;
 import View.Cell;
 
 public class App extends JFrame {
-	private static final int CELLSPEROW = 15;
+	private static final int CELLSPEROW = Model.State.getWidth();
+	private static final int ROWS = Model.State.getHeight();
 	private static final int FRAMESIZE = 500;
 	private JFrame frame;
-	Cell[][] buttons = new Cell[CELLSPEROW][CELLSPEROW];
+	Cell[][] buttons = new Cell[ROWS][CELLSPEROW];
 	private JButton start;
+	private JButton increment;
 	private JButton pause;
 	Controller controller;
 
@@ -27,7 +29,8 @@ public class App extends JFrame {
 	}
 
 	public App() {
-		buttons = new Cell[CELLSPEROW][CELLSPEROW];
+		buttons = new Cell[ROWS][CELLSPEROW];
+		controller = Controller.getInstance();
 
 		frame = new JFrame("Game of Life");
 		frame.setSize(FRAMESIZE, FRAMESIZE);
@@ -40,15 +43,12 @@ public class App extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-		State model = State.getInstance();
-
-		controller = Controller.getInstance(model);
 	}
 
 	private void initializeGrid() {
 		Container grid = new Container();
-		grid.setLayout(new GridLayout(CELLSPEROW, CELLSPEROW));
-		for (int i = 0; i < CELLSPEROW; i++) {
+		grid.setLayout(new GridLayout(ROWS, CELLSPEROW));
+		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < CELLSPEROW; j++) {
 				buttons[i][j] = new Cell();
 				grid.add(buttons[i][j]);
@@ -67,7 +67,16 @@ public class App extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//your actions
-				controller.onStart();
+				controller.onStart(buttons);
+			}
+		});
+		increment = new JButton("Increment");
+		increment.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//your actions
+				controller.onIncrement(buttons);
 			}
 		});
 		pause = new JButton("Pause");
@@ -84,7 +93,7 @@ public class App extends JFrame {
 		// pause.addActionListener(actionListener);
 
 		buttonPanel.add(start);
-
+		buttonPanel.add(increment);
 		buttonPanel.add(pause);
 		frame.add(buttonPanel, BorderLayout.SOUTH);
 	}
