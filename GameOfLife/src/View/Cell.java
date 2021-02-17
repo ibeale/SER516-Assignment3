@@ -42,8 +42,8 @@ public class Cell extends JButton implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		isAlive = controller.onCellClicked(col, row);
-		updateCellState(isAlive);
+		boolean newState = controller.onCellClicked(row, col);
+		updateCellState(newState);
 		// value++;
 		// value %= 2;
 		// switch (value) {

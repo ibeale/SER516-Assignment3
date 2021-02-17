@@ -18,10 +18,11 @@ public class Controller {
         return result;
     }
 
+    // iterate over each cell, fetch new state, communicate back to view
     public void onIncrement(Cell[][] buttons) {
-        // iterate over each cell, fetch new state, communicate back to view
         model.incrementState();
         boolean[][] newState = model.getCurrentState();
+
         for (int x = 0; x < newState.length; x++) {
             for (int y = 0; y < newState[x].length; y++) {
                 // System.out.print("Old: " + buttons[x][y].getCellState()+ " setting to "+newState[x][y]);
@@ -33,7 +34,10 @@ public class Controller {
     }
 
     public void onStart(Cell[][] buttons) {
+        //timer
+        // ----(999ms)----(1ms) --------1
 
+        //swing worker
     }
 
     public void onPause() {

@@ -50,7 +50,7 @@ public class App extends JFrame {
 		grid.setLayout(new GridLayout(ROWS, CELLSPEROW));
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < CELLSPEROW; j++) {
-				buttons[i][j] = new Cell();
+				buttons[i][j] = new Cell(i, j);
 				grid.add(buttons[i][j]);
 			}
 		}
