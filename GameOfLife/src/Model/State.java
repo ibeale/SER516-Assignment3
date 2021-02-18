@@ -6,8 +6,8 @@ public class State {
     private static State instance;
 
     // arbitrary width and heigh, decided by the team.
-    private static int _width = 5;
-    private static int _height = 5;
+    private static int _width = 15;
+    private static int _height = 15;
 
     private boolean[][] _currentState;
 

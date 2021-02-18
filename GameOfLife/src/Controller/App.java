@@ -30,6 +30,7 @@ public class App extends JFrame {
 
 	public App() {
 		buttons = new Cell[ROWS][CELLSPEROW];
+		Controller.setButtons(buttons);
 		controller = Controller.getInstance();
 
 		frame = new JFrame("Game of Life");
@@ -67,7 +68,7 @@ public class App extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//your actions
-				controller.onStart(buttons);
+				controller.onStart(start, pause);
 			}
 		});
 		increment = new JButton("Increment");
@@ -76,7 +77,7 @@ public class App extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//your actions
-				controller.onIncrement(buttons);
+				controller.onIncrement();
 			}
 		});
 		pause = new JButton("Pause");
@@ -85,10 +86,11 @@ public class App extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//your actions
-				controller.onPause();
+				controller.onPause(start, pause);
 			}
 		});
-
+		pause.setEnabled(false);
+		
 		// start.addActionListener(actionListener);
 		// pause.addActionListener(actionListener);
 
