@@ -19,6 +19,8 @@ public class Game extends JFrame {
 
 	private static final int FRAMESIZE = 500;
 	private JFrame frame;
+	JButton start;
+	JButton pause;
 
 	public Game() {
 
@@ -52,10 +54,10 @@ public class Game extends JFrame {
 	}
 
 	private void initializeButtonPanel() {
-		JButton start;
+
 		JButton increment;
-		JButton pause;
 		JButton reset;
+
 		JPanel buttonPanel = new JPanel();
 		GameControlListener gameControlListener = new GameControlListener();
 
@@ -70,6 +72,8 @@ public class Game extends JFrame {
 
 		reset = new JButton("Reset");
 		reset.addActionListener(gameControlListener);
+		
+		gameControlListener.setButtonReferences(start, pause);
 
 		buttonPanel.add(start);
 		buttonPanel.add(increment);
@@ -78,4 +82,5 @@ public class Game extends JFrame {
 
 		frame.add(buttonPanel, BorderLayout.SOUTH);
 	}
+
 }
