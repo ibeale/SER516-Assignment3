@@ -17,13 +17,10 @@ import Model.State;
  */
 public class Game extends JFrame {
 
-	private static final int FRAMESIZE = 500;
 	private JFrame frame;
-	JButton start;
-	JButton pause;
 
 	public Game() {
-
+		final int FRAMESIZE = 500;
 		frame = new JFrame("Game of Life");
 		frame.setSize(FRAMESIZE, FRAMESIZE);
 		frame.setLayout(new BorderLayout());
@@ -57,7 +54,8 @@ public class Game extends JFrame {
 
 		JButton increment;
 		JButton reset;
-
+		JButton start;
+		JButton pause;
 		JPanel buttonPanel = new JPanel();
 		GameControlListener gameControlListener = new GameControlListener();
 
@@ -72,7 +70,7 @@ public class Game extends JFrame {
 
 		reset = new JButton("Reset");
 		reset.addActionListener(gameControlListener);
-		
+
 		gameControlListener.setButtonReferences(start, pause);
 
 		buttonPanel.add(start);
