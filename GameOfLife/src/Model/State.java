@@ -11,8 +11,8 @@ import View.Cell;
 public class State {
 	private static State instance;
 
-	private static int _width = 5;
-	private static int _height = 5;
+	private static int _width = 18;
+	private static int _height = 18;
 	private boolean isIncremented = false;
 	private Cell[][] buttons = new Cell[_height][_width];
 	private boolean[][] _currentState;
