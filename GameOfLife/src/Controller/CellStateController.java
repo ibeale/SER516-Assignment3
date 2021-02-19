@@ -3,12 +3,17 @@ package Controller;
 import Model.State;
 import View.Cell;
 
+import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * The Controller class to update cell states based on taken actions - Start,
  * Pause, Increment or Click a cell
  */
 public class CellStateController {
 	private State model;
+	private Timer timer;
 
 	private static CellStateController instance;
 
@@ -37,15 +42,21 @@ public class CellStateController {
 	public void onStart() {
 		// timer
 		// ----(999ms)----(1ms) --------1
-
-		// swing worker
+		TimerTask timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				CellStateController.getInstance().onIncrement();
+			}
+		};
+		timer = new Timer();
+		timer.schedule(timerTask, 0, 500);
 	}
 
 	/**
 	 * This function halts the onIncrement method timer.
 	 */
 	public void onPause() {
-
+		timer.cancel();
 	}
 
 	public static CellStateController getInstance() {
@@ -62,6 +73,7 @@ public class CellStateController {
 	 */
 	public void onReset() {
 		model.resetState();
+		timer.cancel();
 		updateCell();
 	}
 
